@@ -1,0 +1,124 @@
+The RendezView program is a essentially a time based directory.
+
+Data Requirements
+•Users will give us their Student IDs, names and email address at time of registration.
+•During app usage, users will give us schedules and location updates at their discretion.
+•Prior to app launch, we will pre-record building IDs and respective room numbers, as well as a map of the BCIT Burnaby campus.
+
+Core Functionality
+•Upon registration, user’s information is entered into a database. They may optionally input schedule information including time and location. At any time, they may also override their preset schedule with a manual entry.
+•Users may look each other up by Student ID to determine current location if any. In order to make it convenient for frequent users to find each other, they may also add each other to a ‘friends’ list which will store their IDs on record for future lookups.
+•Upon lookup, users may opt to show a map of the campus with ‘blips’ displayed at their current stored location (if any), and the location of the requested user.
+
+Data Analysis:
+User:
+userID, firstName, lastName, email, password, currentLocation, currentFromTime, currentToTime
+	overridingLocation, overridingToTime (kept seperate because you still have the alleged currentToTime may not change, which default back afterwards)
+OwnSchedule
+    [class, location, fromTime, toTime]
+FriendsList
+    [friendID, friendFirstName, firstLastName friendCurrentLocation, friendToTime]
+
+UNF
+Student (sID(p), firstName, lastName, email, password, manualLocation, manualToTime, [friendID(p), friendName, friendLastName, friendLocation, friendToTime], [scheduleID(p), location, fromTime, toTime] )
+
+//overRidingLocation, overRidingToTime would actually just change the currentLocation and currentToTime
+
+
+1NF (resolve repeated entry)
+
+//manualLocation/manualTioTime should either be mirrorer from schedule
+
+Student (sID(p), firstName, lastName, email, password, manualLocation, manualToTime,  )
+
+friendsList (ownerID(p)(f), sID(p)(f)
+
+schedule (sID(p)(f), scheduleID(p), location, fromTime, toTime )
+
+
+2NF (resolve partial dependency)
+
+Same as 1NF
+
+
+3NF: Resolve transient dependency
+
+
+student (sID(p), firstName, lastName, email, password, validatedBool )
+currentLocation(sID(p), buildingID, roomID, fromTime,  toTime)
+friendsList (ownerID(p)(f), sID(p)(f)
+scheduling: (sID (p), time, roomID (p))
+location(buildID(p), roomID(p))
+
+currentLocation( locationID, fromTime, toTime)
+
+
+class: (classID(p), location, time, dayEvery)
+location (locationID, buildingID (p), roomID (p) )
+
+
+maybe instead of building + room, just use one room consist of varchar using the building number and room number?
+
+
+
+
+any varchar > 32, let team know
+
+sID: varchar(10): a00XXXXXX
+
+firstName: varchar(32)
+
+lastName: varchar(32)
+
+roomName: varChar(8)
+
+
+assumption: actual roomNo is 4 digit, no letters
+
+assumption mactual BuildingNo is 4 varchar, first 2 lette3rs, last two numbers
+
+
+
+
+
+
+constarin: 
+
+
+
+2nf
+
+Student (sID(p), firstName, lastNMame, email, currentID(f), classID(f) )
+
+Current(current Id, currentlocation, currenttime)
+
+class (classID(p), location, time)
+
+
+3NF:
+
+Student (sID(p), firstName, lastNMame, email, currentID(f), classID(f) )
+
+Current(current Id, currentlocation, currenttime)
+
+class (classID(p), location, time)
+
+scheduling: (sID (p)(f), classID)
+
+
+Search by name, multiple queries -- shows multiple, than show the location. can go back.
+
+We want to have common
+
+
+
+sID
+
+Lastname
+
+First name
+
+location
+
+
+
