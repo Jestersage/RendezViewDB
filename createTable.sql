@@ -44,17 +44,36 @@ DESCRIBE location;
 --
 --
 --
+DROP TABLE schedule;
+--
+CREATE TABLE schedule
+(userID        varchar(9)     NOT NULL
+,buildingID    varchar(4)     NOT NULL
+,roomID        varchar(5)     NOT NULL
+,days          tinyint(1)         NOT NULL
+,fromTime     time     NOT NULL
+,toTime       time     NOT NULL
+,CONSTRAINT PKSchedule PRIMARY KEY (userID, buildingID, roomID)
+,CONSTRAINT FKUserID FOREIGN KEY (userID) references users(userID)
+,CONSTRAINT FKBuildingID FOREIGN KEY (buildingID) references location(buildingID) 
+,CONSTRAINT FKRoomID FOREIGN KEY (roomID) references location(roomID)
+);
+--Display Table info for debug
+DESCRIBE schedule;
+--
+--
+--
 DROP TABLE currentLocation;
 --
-CREATE TABLE location
+CREATE TABLE currentlocation
 (userID        varchar(9)     NOT NULL
 ,buildingID    varchar(4)     NOT NULL
 ,roomID        varchar(5)     NOT NULL
 ,currentFromTime     time     NOT NULL
 ,currentToTime       time     NOT NULL
-,CONSTRAINT PKCurrentLocation PRIMARY KEY (userID, )
+,CONSTRAINT PKCurrentLocation PRIMARY KEY (userID)
 ,CONSTRAINT FKFriend1 FOREIGN KEY (userID) references Users(userID) 
 ,CONSTRAINT ChkBuilding CHECK (buildingID LIKE 'NE%' OR buildingID LIKE 'NW%' OR buildingID LIKE 'SE%' OR buildingID LIKE 'SW%')
 );
 --Display Table info for debug
-DESCRIBE location;
+DESCRIBE currentlocation;
