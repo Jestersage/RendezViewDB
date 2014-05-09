@@ -55,8 +55,7 @@ CREATE TABLE schedule
 ,toTime       time     NOT NULL
 ,CONSTRAINT PKSchedule PRIMARY KEY (userID, buildingID, roomID)
 ,CONSTRAINT FKUserID FOREIGN KEY (userID) references users(userID)
-,CONSTRAINT FKBuildingID FOREIGN KEY (buildingID) references location(buildingID) 
-,CONSTRAINT FKRoomID FOREIGN KEY (roomID) references location(roomID)
+,CONSTRAINT FKLocation FOREIGN KEY (buildingID, roomID) references location(buildingID, roomID) 
 );
 --Display Table info for debug
 DESCRIBE schedule;
@@ -71,9 +70,8 @@ CREATE TABLE currentlocation
 ,roomID        varchar(5)     NOT NULL
 ,currentFromTime     time     NOT NULL
 ,currentToTime       time     NOT NULL
-,CONSTRAINT PKCurrentLocation PRIMARY KEY (userID)
-,CONSTRAINT FKFriend1 FOREIGN KEY (userID) references Users(userID) 
-,CONSTRAINT ChkBuilding CHECK (buildingID LIKE 'NE%' OR buildingID LIKE 'NW%' OR buildingID LIKE 'SE%' OR buildingID LIKE 'SW%')
+,CONSTRAINT PKcurrent PRIMARY KEY (userID, currentFromTime, currentToTime)
+,CONSTRAINT FKcurrent FOREIGN KEY (userID) references Users(userID) 
 );
 --Display Table info for debug
 DESCRIBE currentlocation;
