@@ -1,0 +1,2 @@
+INSERT INTO Schedule
+    VALUES ('A00855385', 1, 2, TIME('12:30:00'), TIME('13:30:00')); 
