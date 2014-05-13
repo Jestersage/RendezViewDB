@@ -31,4 +31,10 @@ FROM schedule s
 WHERE u.firstName = 'Lewis'
 ;
 --Inset data from schedule to currentLocation
-INSERT INTO currentLocation
+INSERT INTO currentLocation (userID, locationID, day, currentFromTime, currentToTime)
+SELECT s.userID, s.locationID, s.days, s.fromTime, s.toTime
+FROM schedule s
+WHERE s.days = 2
+    AND s.fromTime = TIME('12:30:00')
+;
+--please resolve the issue with the day. right now it works with all day.
