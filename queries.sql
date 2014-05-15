@@ -11,6 +11,7 @@ WHERE f.ownerID = 'a00112234'
 INSERT INTO friendlist
 VALUES('a00112234', 'a00223456')
 ;
+--
 --given userID = A00855385, find its schedule
 SELECT s.userID, l.buildingID, l.roomID, s.fromTime, s.toTime
 FROM schedule s
@@ -38,3 +39,4 @@ WHERE s.days = 2
     AND s.fromTime = TIME('12:30:00')
 ;
 --please resolve the issue with the day. right now it works with all day.
+--Update the 
